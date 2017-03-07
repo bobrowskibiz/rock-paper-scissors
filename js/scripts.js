@@ -77,7 +77,6 @@ function checkRoundWinner(playerPick, computerPick) {
   playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 
   var winnerIs = 'player';
-
     if (playerPick == computerPick) {
         winnerIs = 'noone'; 
     } else if (
@@ -94,8 +93,26 @@ function checkRoundWinner(playerPick, computerPick) {
         computerResultElem.innerHTML = "Wygrana!";
         computer.score++;
     }
-
+    setGamePoints();
+    
+    checkGameWinner(player.score, computer.score);
 }
+
+// funkcja zliczająca kto wygrał
+
+function checkGameWinner(playerScore, computerScore) {
+    if (playerScore == 10 ) {
+        alert('Wygral gracz!');
+        setGameElements(gameState = 'ended');
+    } else if (computerScore == 10) {
+        alert('Wygral komputer!');
+        setGameElements(gameState = 'ended');
+    } else {
+        console.log('wynik komputera = ' + computerScore + ', wynik gracza = ' + playerScore);
+    }
+}
+
+
 
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
