@@ -32,51 +32,35 @@ var gameState = 'notStarted',  //started // ended
     };
 
 function setGameElements() {
-  switch(gameState) {
-    case 'started':
-        newGameElem.style.display = 'none';
-        pickElem.style.display = 'block';
-        resultsElem.style.display = 'block';
-      break;
-    case 'ended':
-        newGameBtn.innerText = 'Jeszcze raz';
-    case 'notStarted':
-    default:
-        newGameElem.style.display = 'block';
-        pickElem.style.display = 'none';
-        resultsElem.style.display = 'none';
-  }
+    switch(gameState) {
+        case 'started':
+            newGameElem.style.display = 'none';
+            pickElem.style.display = 'block';
+            resultsElem.style.display = 'block';
+        break;
+        case 'ended':
+            newGameBtn.innerText = 'Jeszcze raz';
+        case 'notStarted':
+        default:
+            newGameElem.style.display = 'block';
+            pickElem.style.display = 'none';
+            resultsElem.style.display = 'none';
+    }
 }
 
 setGameElements();
-
-
-
-function playerPick(playerPick) {
-    console.log(playerPick);
-}
-
 var x = Math.random();
 Math.floor(Math.random()*3);
-
 
 function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
     return possiblePicks[Math.floor(Math.random()*3)];
 }
 
-
-function playerPick(playerPick) {
-    var computerPick = getComputerPick();
-    playerPickElem.innerHTML = playerPick;
-    computerPickElem.innerHTML = computerPick;
-}
-
-
 function checkRoundWinner(playerPick, computerPick) {
-  playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+    var winnerIs = 'player';
 
-  var winnerIs = 'player';
     if (playerPick == computerPick) {
         winnerIs = 'noone'; 
     } else if (
@@ -94,25 +78,18 @@ function checkRoundWinner(playerPick, computerPick) {
         computer.score++;
     }
     setGamePoints();
-    
     checkGameWinner(player.score, computer.score);
 }
 
-// funkcja zliczająca kto wygrał
-
 function checkGameWinner(playerScore, computerScore) {
     if (playerScore == 10 ) {
-        alert('Wygral gracz!');
+        alert('Wygral gracz! ' + playerNameElem.innerHTML);
         setGameElements(gameState = 'ended');
     } else if (computerScore == 10) {
         alert('Wygral komputer!');
         setGameElements(gameState = 'ended');
-    } else {
-        console.log('wynik komputera = ' + computerScore + ', wynik gracza = ' + playerScore);
     }
 }
-
-
 
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
@@ -129,8 +106,9 @@ function setGamePoints() {
 }
 
 function newGame() {
-  player.name = prompt('Graczu, wpisz swoje imię', 'imię gracza');
-  if (player.name) {
+    player.name = prompt('Graczu, wpisz swoje imię', 'imię gracza');
+
+    if (player.name) {
     player.score = computer.score = 0;
     gameState = 'started';
     setGameElements();
