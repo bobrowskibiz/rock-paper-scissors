@@ -18,9 +18,9 @@ var newGameBtn = document.getElementById('js-newGameButton'),
 
 
 newGameBtn.addEventListener('click', newGame);
-pickRock.addEventListener('click', function() { playerPick('rock') });
-pickPaper.addEventListener('click', function() { playerPick('paper') });
-pickScissors.addEventListener('click', function() { playerPick('scissors') });
+pickRock.addEventListener('click', function() { playerPick('kamień') });
+pickPaper.addEventListener('click', function() { playerPick('papier') });
+pickScissors.addEventListener('click', function() { playerPick('nożyczki') });
 
 var gameState = 'notStarted',  //started // ended
     player = {
@@ -53,7 +53,7 @@ var x = Math.random();
 Math.floor(Math.random()*3);
 
 function getComputerPick() {
-    var possiblePicks = ['rock', 'paper', 'scissors'];
+    var possiblePicks = ['kamień', 'papier', 'nożyczki'];
     return possiblePicks[Math.floor(Math.random()*3)];
 }
 
@@ -64,9 +64,9 @@ function checkRoundWinner(playerPick, computerPick) {
     if (playerPick == computerPick) {
         winnerIs = 'noone'; 
     } else if (
-        (computerPick == 'rock' &&  playerPick == 'scissors') ||
-        (computerPick == 'scissors' &&  playerPick == 'paper') ||
-        (computerPick == 'paper' &&  playerPick == 'rock') ) {
+        (computerPick == 'kamień' &&  playerPick == 'nożyczki') ||
+        (computerPick == 'nożyczki' &&  playerPick == 'papier') ||
+        (computerPick == 'papier' &&  playerPick == 'kamień') ) {
         winnerIs = 'computer';
     }
 
@@ -83,7 +83,7 @@ function checkRoundWinner(playerPick, computerPick) {
 
 function checkGameWinner(playerScore, computerScore) {
     if (playerScore == 10 ) {
-        alert('Wygral gracz! ' + playerNameElem.innerHTML);
+        alert('Wygral gracz! ' + player.name);
         setGameElements(gameState = 'ended');
     } else if (computerScore == 10) {
         alert('Wygral komputer!');
